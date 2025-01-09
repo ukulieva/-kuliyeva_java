@@ -1,0 +1,70 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static final String TARGET_NAME = "John";
+    public static final int DENOMINATOR = 3;
+    public static final int THRESHOLD = 7;
+
+    public static void main(String[] args) {
+
+        try (Scanner scanner = new Scanner(System.in)) {
+
+            // Task 1.1: Check if the number is greater than THRESHOLD
+            System.out.print("Please enter a number: ");
+            var input = scanner.nextLine();
+
+            try {
+                var number = Integer.parseInt(input);
+                if (number > THRESHOLD) {
+                    System.out.println("Hello");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. This isn't a valid integer or the number is too large");
+            }
+
+            // Task 2: Check if the name matches TARGET_NAME
+            System.out.print("Enter a name: ");
+            var name = scanner.nextLine();
+            if (TARGET_NAME.equalsIgnoreCase(name)) {
+                System.out.println("Hello, " + TARGET_NAME);
+            } else {
+                System.out.println("There is no such name");
+            }
+
+            // Task 3: Print array elements that are multiples of DENOMINATOR
+            System.out.print("Enter the size of the array: ");
+            var sizeInput = scanner.nextLine();
+
+            try {
+                var size = Integer.parseInt(sizeInput);
+                var array = new int[size];
+
+                System.out.println("Enter the elements of the array:");
+                for (var i = 0; i < size; i++) {
+                    System.out.print("Enter element " + (i + 1) + ": ");
+                    var elementInput = scanner.nextLine();
+
+                    try {
+                        array[i] = Integer.parseInt(elementInput);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input. This isn't a valid integer or the number is too large. Please enter a valid integer");
+                        i--;
+                    }
+                }
+
+                System.out.println("Array elements that are multiples of " + DENOMINATOR + ":");
+                for (var element : array) {
+                    if (element % DENOMINATOR == 0) {
+                        System.out.print(element + " ");
+                    }
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input for the size of the array. This isn't a valid integer or the number is too large");
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error with input: " + e.getMessage());
+        }
+    }
+}
